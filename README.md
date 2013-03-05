@@ -3,43 +3,39 @@ Train Times dashlet for Alfresco Share
 
 Author: Will Abson
 
-This project defines a custom dashlet to display scheduled train departures
-from any UK railway station, using information sources from the National Rail
-Enquiries Live Departure Boards system.
+This project defines a custom dashlet which displays train status information from the National Rail Enquires web site.
+
+![Train Times Dashlet](screenshots/train-times-dashlet.png)
 
 Installation
 ------------
 
-The dashlet has been developed to install on top of an existing Alfresco
-3.3 installation.
+The dashlet is packaged as a single JAR file for easy installation into Alfresco Share.
 
-An Ant build script is provided to build a JAR file containing the 
-custom files, which can then be installed into the 'tomcat/shared/lib' folder 
-of your Alfresco installation.
+To install the dashlet, simply drop the `train-times-dashlet-<version>.jar` file into the `tomcat/shared/lib` folder within your Alfresco installation, and restart the application server. You might need to create this folder if it does not already exist.
 
-To build the JAR file, run the following command from the base project 
-directory.
+Building from Source
+--------------------
 
-    ant clean dist-jar
+An Ant build script is provided to build a JAR file containing the custom files, which can then be installed into the `tomcat/shared/lib` folder of your Alfresco installation.
 
-The command should build a JAR file named train-times-dashlet.jar
-in the 'dist' directory within your project.
+To build the JAR file, run Ant from the base project directory.
 
-To deploy the dashlet files into a local Tomcat instance for testing, you can 
-use the hotcopy-tomcat-jar task. You will need to set the tomcat.home
+    ant dist-jar
+
+The command should build a JAR file named `train-times-dashlet-<version>.jar` in the `build/dist` directory within your project, which you can then copy into the `tomcat/shared/lib` folder of your Alfresco installation.
+
+Alternatively, you can use the build script to _hot deploy_ the JAR file directly into a local Tomcat instance for testing. You will need to use the `hotcopy-tomcat-jar task` and set the `tomcat.home`
 property in Ant.
 
-    ant -Dtomcat.home=C:/Alfresco/tomcat clean hotcopy-tomcat-jar
+    ant -Dtomcat.home=C:/Alfresco/tomcat hotcopy-tomcat-jar
     
-Once you have run this you will need to restart Tomcat so that the classpath 
-resources in the JAR file are picked up.
+After you have deployed the JAR file you will need to restart Tomcat to ensure it picks up the changes.
 
-Using the dashlet
------------------
+Usage
+-----
 
-Log in to Alfresco Share and navigate to a site or user dashboard. Click the 
-Customize Dashboard button to edit the contents of the dashboard and drag 
-the dashlet into one of the columns from the list of dashlets.
-
-Click Configure to choose a departure station. If you want you can also 
-select a 'via' station to limit the results.
+  1. Log in to Alfresco Share and navigate to a site where you are a Site Manager, OR to your user dashboard
+  2. On the dashboard and click the *Customize Dashboard* button to edit the contents of the dashboard. Drag the Train Times dashlet into one of the columns from the list of dashlets to add it.
+  3. Click *OK* to save the configuration.
+  4. The dashlet should now be shown in your dashboard.
